@@ -17,7 +17,7 @@
         android:ems="10"
         android:hint="@string/edit_message"
         android:inputType="textPersonName"
-        android:textSize="36sp"
+        android:textSize="24sp"
         android:typeface="normal"
         app:layout_constraintEnd_toStartOf="@+id/button"
         app:layout_constraintHorizontal_bias="0.5"
