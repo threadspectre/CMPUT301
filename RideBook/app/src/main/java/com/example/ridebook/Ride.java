@@ -1,17 +1,16 @@
 package com.example.ridebook;
 
-import java.sql.Time;
 import java.util.Date;
 
 public class Ride {
-    private Date date;
-    private Time time;
-    private float distance;
-    private float averagespeed;
+    private String date;
+    private String time;
+    private double distance;
+    private double averagespeed;
     private int rpm;
     private String comment;
 
-    public Ride(Date date, Time time, float distance, float averagespeed, int rpm, String comment) {
+    public Ride(String date, String time, double distance, double averagespeed, int rpm, String comment) {
         this.setDate(date);
         this.setTime(time);
         this.setDistance(distance);
@@ -30,7 +29,7 @@ public class Ride {
 
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         if(date!=null) {
             this.date = date;
         }
@@ -39,7 +38,7 @@ public class Ride {
         }
     }
 
-    public void setTime(Time time) {
+    public void setTime(String time) {
         if(time!=null) {
             this.time = time;
         }
@@ -49,7 +48,7 @@ public class Ride {
     }
 
 
-    public void setDistance(float distance) {
+    public void setDistance(double distance) {
         if(distance>0){
             this.distance = distance;
         }
@@ -58,7 +57,7 @@ public class Ride {
         }
     }
 
-    public void setAveragespeed(float averagespeed) {
+    public void setAveragespeed(double averagespeed) {
         this.averagespeed = averagespeed;
     }
 
@@ -66,19 +65,19 @@ public class Ride {
         this.rpm = rpm;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public Time getTime() {
+    public String getTime() {
         return time;
     }
 
-    public float getDistance() {
+    public double getDistance() {
         return distance;
     }
 
-    public float getAveragespeed() {
+    public double getAveragespeed() {
         return averagespeed;
     }
 

@@ -1,33 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:orientation="horizontal">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+        <Button
+            android:id="@+id/addRideButton"
+            android:layout_width="136dp"
+            android:layout_height="match_parent"
+            android:baselineAligned="false"
+            android:text="Add Ride"
+            android:visibility="visible" />
 
-    </com.google.android.material.appbar.AppBarLayout>
+        <Button
+            android:id="@+id/editRideButton"
+            android:layout_width="133dp"
+            android:layout_height="match_parent"
+            android:baselineAligned="false"
+            android:text="Edit Ride" />
 
-    <include layout="@layout/content_main" />
+        <Button
+            android:id="@+id/deleteRideButton"
+            android:layout_width="116dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Delete Ride" />
+    </LinearLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
+    <ListView
+        android:id="@+id/ride_list_view"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:cacheColorHint="#00110B0B"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false">
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </ListView>
+
+
+</LinearLayout>
