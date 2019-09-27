@@ -54,10 +54,12 @@ public class AddCityFragment extends DialogFragment {
         provinceEditText= view.findViewById(R.id.province_edit_text);
         if(getArguments()!=null){
             city=(City) getArguments().getSerializable("city");
+            cityEditText.setText(city.getName());
+            provinceEditText.setText(city.getProvince());
         }
 
         return builder.setView(view)
-                .setTitle("Add city")
+                .setTitle("Add city/Edit City")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
