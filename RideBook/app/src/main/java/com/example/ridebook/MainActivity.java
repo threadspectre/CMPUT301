@@ -29,14 +29,14 @@ public class MainActivity extends AppCompatActivity implements AddRideFragment.O
         addRideButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new AddRideFragment().show(getSupportFragmentManager(), "ADD_CITY");
+                new AddRideFragment().show(getSupportFragmentManager(), "ADD_RIDE");
 
             }
         });
         rideListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                AddRideFragment.newInstance(RideList.get(position)).show(getSupportFragmentManager(), "EDIT_CITY");
+                AddRideFragment.newInstance(RideList.get(position)).show(getSupportFragmentManager(), "EDIT_RIDE");
             }
         });
 

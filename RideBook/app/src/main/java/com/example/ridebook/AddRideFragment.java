@@ -64,7 +64,7 @@ public class AddRideFragment extends DialogFragment {
         rpmEditText= view.findViewById(R.id.RPM_entry_add);
         timeEditText= view.findViewById(R.id.time_entry_add);
         commentEditText= view.findViewById(R.id.comment_entry_add);
-        final FragmentManager fm = (getActivity()).getSupportFragmentManager();
+        final FragmentManager dm = (getActivity()).getSupportFragmentManager();
         dateEditText.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -74,7 +74,21 @@ public class AddRideFragment extends DialogFragment {
                 // set the targetFragment to receive the results, specifying the request code
                 newFragment.setTargetFragment(AddRideFragment.this, REQUEST_CODE);
                 // show the datePicker
-                newFragment.show(fm, "datePicker");
+                newFragment.show(dm, "datePicker");
+            }
+        });
+
+        final FragmentManager tm = (getActivity()).getSupportFragmentManager();
+        timeEditText.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // create the timePickerFragment
+                AppCompatDialogFragment newFragment = new SelectTimeFragment();
+                // set the targetFragment to receive the results, specifying the request code
+                newFragment.setTargetFragment(AddRideFragment.this, REQUEST_CODE);
+                // show the timePicker
+                newFragment.show(tm, "timePicker");
             }
         });
 
@@ -93,24 +107,6 @@ public class AddRideFragment extends DialogFragment {
                 .setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
-                        if(distanceEditText.getText().toString().equals(null)){
-                            distanceEditText.setText(0);
-                        }
-                        if(dateEditText.getText().toString().equals(null)){
-                            dateEditText.setText("01/01/2000");
-                        }
-                        if(timeEditText.getText().toString().equals(null)){
-                            timeEditText.setText("00:00");
-                        }
-                        if(rpmEditText.getText().toString().equals(null)){
-                            rpmEditText.setText(0);
-                        }
-                        if(commentEditText.getText().toString().equals(null)){
-                            commentEditText.setText("");//LOL talk about redundant
-                        }
-                        if(averageSpeedEditText.getText().toString().equals(null)){
-                            averageSpeedEditText.setText(0);
-                        }
                         Double distance= Double.parseDouble(distanceEditText.getText().toString());
                         Double avgSpeed= Double.parseDouble(averageSpeedEditText.getText().toString());
                         Integer rpm= Integer.parseInt(rpmEditText.getText().toString());
@@ -118,7 +114,26 @@ public class AddRideFragment extends DialogFragment {
                         String time= timeEditText.getText().toString();
                         String comment= commentEditText.getText().toString();
 
+                        //TODO: Fix bug where empty fields in add ride crash the app
                         if(ride==null){
+                            if(distanceEditText.getText().toString()==""){
+                                distance=0.0;
+                            }
+                            if(dateEditText.getText().toString()==""){
+                                date="01/01/2000";
+                            }
+                            if(timeEditText.getText().toString()==""){
+                                time="00:00";
+                            }
+                            if(rpmEditText.getText().toString()==""){
+                                rpm=0;
+                            }
+                            if(commentEditText.getText().toString()==""){
+                                comment="";//LOL talk about redundant
+                            }
+                            if(averageSpeedEditText.getText().toString()==""){
+                                avgSpeed=0.0;
+                            }
                             Ride ride= new Ride(date,time,distance,avgSpeed,rpm,comment);
                             listener.addRide(ride);
                         }
@@ -139,8 +154,14 @@ public class AddRideFragment extends DialogFragment {
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             // get date from string
             String selectedDate = data.getStringExtra("selectedDate");
+            String selectedTime = data.getStringExtra("selectedTime");
             // set the value of the editText
-            dateEditText.setText(selectedDate);
+            if(selectedTime!=null){
+                timeEditText.setText(selectedTime);
+            }
+            if(selectedDate!=null){
+                dateEditText.setText(selectedDate);
+            }
         }
     }
 
