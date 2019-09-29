@@ -3,70 +3,81 @@ package com.example.ridebook;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.text.SimpleDateFormat;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AddRideFragment.OnFragmentInteractionListener {
     private ListView rideListView;
     private ArrayAdapter<Ride> rideAdapter;
-    private Button AddRide;
-    public Ride sampleRide;
-    public Ride sampleRide2;
-    public ArrayList<Ride> RideList= new ArrayList<Ride>();
+    private Button addRideButton;
+    private Button deleteRideButton;
+    public Ride toDelete;
+    public ArrayList<Ride> RideList = new ArrayList<Ride>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd GH");
-        SimpleDateFormat stf= new SimpleDateFormat("H:mm:ss");
-        String currentDate = sdf.format(new Date());
-        String currentTIme= stf.format(new Date());
-        sampleRide= new Ride(currentDate,
-                currentTIme,12.0,0,0,"");
-        sampleRide2= new Ride(currentDate,
-                currentTIme,14.0,0,0,"");
-        RideList.add(sampleRide);
-        RideList.add(sampleRide2);
-        rideAdapter= new ArrayAdapter<Ride>(this,R.layout.content_main,RideList);
-        rideListView=findViewById(R.id.ride_list_view);
-        rideListView.setAdapter(rideAdapter);}}
-//
-//        nameEditText= findViewById(R.id.editText);
-//        nameAddCity= findViewById(R.id.addCityButton);
-//        nameRemoveCity=findViewById(R.id.removeCityButton);
-//        nameSubmit=findViewById(R.id.submitButton);
-//        //Submit button listener
-//        ButtonListener listener= new ButtonListener(nameEditText,cityAdapter,nameSubmit);
-//        //Add City Listener
-//        ButtonListener2 listener2= new ButtonListener2(nameEditText,nameSubmit);
-//        nameSubmit.setOnClickListener(listener);
-//        nameAddCity.setOnClickListener(listener2);
-//        /*This is the deletion part, essentially every time you click on an entry, you initialize the
-//        remove city listener*/
-//        cityListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                cityListView.setSelection(i);
-//                view.setSelected(true);
-//                setToDelete(cityListView.getItemAtPosition(i).toString());
-//                ButtonListener3 listener3= new ButtonListener3(getToDelete(),cityAdapter);
-//                nameRemoveCity.setOnClickListener(listener3);
-//            }
-//        });
-//
-//    }
-//
-//    public void setToDelete(String toDelete) {
-//        this.toDelete = toDelete;
-//    }
-//
-//    public String getToDelete() {
-//        return toDelete;
-//    }
+        rideListView = findViewById(R.id.ride_list_view);
+        deleteRideButton=findViewById(R.id.deleteRideButton);
+        addRideButton=findViewById(R.id.addRideButton);
+        addRideButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AddRideFragment().show(getSupportFragmentManager(), "ADD_CITY");
+
+            }
+        });
+        rideListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                AddRideFragment.newInstance(RideList.get(position)).show(getSupportFragmentManager(), "EDIT_CITY");
+            }
+        });
+
+        rideListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                rideListView.setSelection(position);
+                view.setSelected(true);
+                setToDelete(RideList.get(position));
+                deleteListener listener= new deleteListener(getToDelete(),rideAdapter);
+                deleteRideButton.setOnClickListener(listener);
+                return true;
+            }
+
+        });
+
+        rideAdapter = new RideAdapter(this, RideList);
+
+        rideListView.setAdapter(rideAdapter);
+
+    }
+    public void addRide(Ride ride){
+        rideAdapter.add(ride);
+        rideAdapter.notifyDataSetChanged();
+    }
+    public void editRide(Ride ride,String date,String time,Double distance,Double averageSpeed,int rpm,String comment){
+        ride.setTime(time);
+        ride.setRpm(rpm);
+        ride.setDate(date);
+        ride.setDistance(distance);
+        ride.setComment(comment);
+        ride.setAveragespeed(averageSpeed);
+        rideAdapter.notifyDataSetChanged();
+    }
+
+    public void setToDelete(Ride toDelete) {
+        this.toDelete = toDelete;
+    }
+
+    public Ride getToDelete() {
+        return toDelete;
+    }
+}
 //}

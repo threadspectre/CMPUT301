@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements AddCityFragment.O
     }
 
     public void addCity(City city){
+
         cityAdapter.add(city);
     }
 

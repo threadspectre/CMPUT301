@@ -28,10 +28,7 @@ public class AddCityFragment extends DialogFragment {
         super.onAttach(context);
         listener=(OnFragmentInteractionListener) context;
     }
-//
-//    public AddCityFragment(City city) {
-//        this.city = city;
-//    }
+
 
     public static AddCityFragment newInstance(City city){
         Bundle args = new Bundle();

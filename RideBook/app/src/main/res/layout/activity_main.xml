@@ -6,6 +6,13 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:text="mmelende-RideBook"
+        android:textSize="24sp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,18 +20,11 @@
 
         <Button
             android:id="@+id/addRideButton"
-            android:layout_width="136dp"
+            android:layout_width="202dp"
             android:layout_height="match_parent"
             android:baselineAligned="false"
             android:text="Add Ride"
             android:visibility="visible" />
-
-        <Button
-            android:id="@+id/editRideButton"
-            android:layout_width="133dp"
-            android:layout_height="match_parent"
-            android:baselineAligned="false"
-            android:text="Edit Ride" />
 
         <Button
             android:id="@+id/deleteRideButton"

@@ -1,8 +1,9 @@
 package com.example.ridebook;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Ride {
+public class Ride implements Serializable {
     private String date;
     private String time;
     private double distance;
@@ -20,12 +21,7 @@ public class Ride {
     }
 
     public void setComment(String comment) {
-        if(comment.length() <= 20){
-            this.comment = comment;
-        }
-        else{
-            System.out.println("Comment is too long");
-        }
+        this.comment=comment;
 
     }
 
