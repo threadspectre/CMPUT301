@@ -64,6 +64,9 @@ public class AddRideFragment extends DialogFragment {
         rpmEditText= view.findViewById(R.id.RPM_entry_add);
         timeEditText= view.findViewById(R.id.time_entry_add);
         commentEditText= view.findViewById(R.id.comment_entry_add);
+        /*This implementation of datepicker is based on:
+        https://brandonlehr.com/android/learn-to-code/2018/08/19/callling-android-datepicker-fragment-from-a-fragment-and-getting-the-date?fbclid=IwAR0ixIB3nbIx7k2gQpu1Nz3VU48pg5ii3grksnRqgLNr-TcDZgV2QHg0uXA
+         */
         final FragmentManager dm = (getActivity()).getSupportFragmentManager();
         dateEditText.setOnClickListener(new View.OnClickListener() {
 
@@ -77,7 +80,7 @@ public class AddRideFragment extends DialogFragment {
                 newFragment.show(dm, "datePicker");
             }
         });
-
+        //Modified datepicker to provide timepicker functionality as well
         final FragmentManager tm = (getActivity()).getSupportFragmentManager();
         timeEditText.setOnClickListener(new View.OnClickListener() {
 
@@ -147,7 +150,8 @@ public class AddRideFragment extends DialogFragment {
                 .create();
     }
 
-    //
+    //Slightly modified version of datepicker, also obtained from:
+    //https://brandonlehr.com/android/learn-to-code/2018/08/19/callling-android-datepicker-fragment-from-a-fragment-and-getting-the-date?fbclid=IwAR0ixIB3nbIx7k2gQpu1Nz3VU48pg5ii3grksnRqgLNr-TcDZgV2QHg0uXA
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         // check for the results

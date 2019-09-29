@@ -1,7 +1,6 @@
 package com.example.ridebook;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class Ride implements Serializable {
     private String date;

@@ -58,6 +58,8 @@ public class MainActivity extends AppCompatActivity implements AddRideFragment.O
         rideListView.setAdapter(rideAdapter);
 
     }
+
+    //Both are interface methods from AddRideFragment to allow for addition and editing of rides.
     public void addRide(Ride ride){
         rideAdapter.add(ride);
         rideAdapter.notifyDataSetChanged();

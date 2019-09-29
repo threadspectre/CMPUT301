@@ -1,3 +1,7 @@
+//This datepicker fragment implementation is based on:
+// https://brandonlehr.com/android/learn-to-code/2018/08/19/callling-android-datepicker-fragment-from-a-fragment-and-getting-the-date?fbclid=IwAR0ixIB3nbIx7k2gQpu1Nz3VU48pg5ii3grksnRqgLNr-TcDZgV2QHg0uXA
+//Best efforts were made to not straight up copy and paste but it turns out implementing a datepicker inside a fragment is very hard to do.
+
 package com.example.ridebook;
 import android.app.Activity;
 import android.app.DatePickerDialog;
