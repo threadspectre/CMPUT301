@@ -153,6 +153,16 @@ public class AddRideFragment extends DialogFragment {
                         date= dateEditText.getText().toString();
                         time= timeEditText.getText().toString();
                         comment= commentEditText.getText().toString();
+                        //Prevents negative numbers, though it should be impossible to type them in as the keyboard will not register the negative sign
+                        if(distance<0.0){
+                            distance*=-1;
+                        }
+                        if(avgSpeed<0.0){
+                            distance*=-1;
+                        }
+                        if(rpm<0){
+                            rpm*=-1;
+                        }
 
                         //TODO: Fix bug where empty inputs in add ride crash the app
                         //EDIT: Fixed above by defaulting values where input is empty

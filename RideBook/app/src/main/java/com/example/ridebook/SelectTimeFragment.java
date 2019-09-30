@@ -40,14 +40,14 @@ public class SelectTimeFragment extends AppCompatDialogFragment implements TimeP
         //Formats the time correctly
         String newHour;
         String newMinute;
-        if(hour==0){
-            newHour="00";
+        if(hour<10){
+            newHour="0"+Integer.toString(hour);
         }
         else{
             newHour=Integer.toString(hour);
         }
-        if(minute==0){
-            newMinute="00";
+        if(minute<10){
+            newMinute="0"+Integer.toString(minute);
         }
         else{
             newMinute=Integer.toString(minute);
