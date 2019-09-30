@@ -13,7 +13,7 @@
         <TextView
             android:id="@+id/date_header_add"
             android:layout_width="match_parent"
-            android:layout_height="34dp"
+            android:layout_height="25dp"
             android:layout_weight="1"
             android:gravity="center_horizontal"
             android:text="Date" />
@@ -25,7 +25,7 @@
             android:layout_weight="1"
             android:ems="10"
             android:gravity="center_horizontal"
-            android:text="01/01/2000"
+            android:text="2000-01-01"
             android:focusable="false"
             android:inputType="date" />
 
@@ -67,10 +67,10 @@
         <TextView
             android:id="@+id/distance_header_add"
             android:layout_width="match_parent"
-            android:layout_height="34dp"
+            android:layout_height="25dp"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:text="Distance" />
+            android:text="Distance (km)" />
 
         <EditText
             android:id="@+id/distance_entry_add"
@@ -93,10 +93,10 @@
         <TextView
             android:id="@+id/avg_speed_header_add"
             android:layout_width="match_parent"
-            android:layout_height="34dp"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:text="Average Speed"
+            android:text="Average Speed (km/h)"
             android:textSize="14sp" />
 
         <EditText
@@ -123,7 +123,7 @@
             android:layout_height="34dp"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:text="RPM" />
+            android:text="Cadence (RPM)" />
 
         <EditText
             android:id="@+id/RPM_entry_add"

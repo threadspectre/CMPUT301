@@ -30,7 +30,7 @@ public class RideAdapter extends ArrayAdapter<Ride> {
             view = LayoutInflater.from(context).inflate(R.layout.ride_list_content,parent,false);
         }
 
-        TextView averagespeedTextView= view.findViewById(R.id.avg_speed_entry);
+        TextView averageSpeedTextView= view.findViewById(R.id.avg_speed_entry);
         TextView rpmTextView=view.findViewById(R.id.RPM_entry);
         TextView distanceTextView=view.findViewById(R.id.distance_entry);
         TextView dateTextView=view.findViewById(R.id.date_entry);
@@ -39,7 +39,7 @@ public class RideAdapter extends ArrayAdapter<Ride> {
 
         Ride ride=rides.get(position);
 
-        averagespeedTextView.setText(Double.toString(ride.getAveragespeed()));
+        averageSpeedTextView.setText(Double.toString(ride.getAverageSpeed()));
         rpmTextView.setText(Integer.toString(ride.getRpm()));
         distanceTextView.setText(Double.toString(ride.getDistance()));
         dateTextView.setText(ride.getDate());
@@ -48,4 +48,5 @@ public class RideAdapter extends ArrayAdapter<Ride> {
 
         return view;
     }
+
 }

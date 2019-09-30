@@ -1,20 +1,25 @@
 package com.example.ridebook;
 
 import java.io.Serializable;
-
+//Ride Class
+/*Some of the code appears redundant since I implemented default values for the parameters.
+However this occurred much later on in the development process and I left this class unchanged for the most part
+since I was afraid it would break my app somewhere down the line.
+ */
 public class Ride implements Serializable {
     private String date;
     private String time;
     private double distance;
-    private double averagespeed;
+    private double averageSpeed;
     private int rpm;
     private String comment;
 
-    public Ride(String date, String time, double distance, double averagespeed, int rpm, String comment) {
+    public Ride(String date, String time, double distance, double averageSpeed, int rpm, String comment) {
         this.setDate(date);
         this.setTime(time);
         this.setDistance(distance);
-        this.averagespeed = averagespeed;
+        this.averageSpeed = averageSpeed;
+        //I defined cadence as rpm since it was more intuitive and easier to keep track of
         this.rpm = rpm;
         this.setComment(comment);
     }
@@ -52,8 +57,8 @@ public class Ride implements Serializable {
         }
     }
 
-    public void setAveragespeed(double averagespeed) {
-        this.averagespeed = averagespeed;
+    public void setAverageSpeed(double averageSpeed) {
+        this.averageSpeed = averageSpeed;
     }
 
     public void setRpm(int rpm) {
@@ -72,8 +77,8 @@ public class Ride implements Serializable {
         return distance;
     }
 
-    public double getAveragespeed() {
-        return averagespeed;
+    public double getAverageSpeed() {
+        return averageSpeed;
     }
 
     public int getRpm() {

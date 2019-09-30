@@ -1,4 +1,5 @@
 //Modified datepicker fragment to provide timepicker functionality.
+//Again, based on:  https://brandonlehr.com/android/learn-to-code/2018/08/19/callling-android-datepicker-fragment-from-a-fragment-and-getting-the-date?fbclid=IwAR0ixIB3nbIx7k2gQpu1Nz3VU48pg5ii3grksnRqgLNr-TcDZgV2QHg0uXA
 
 package com.example.ridebook;
 import android.app.Activity;
@@ -17,26 +18,41 @@ import java.util.Locale;
 
 public class SelectTimeFragment extends AppCompatDialogFragment implements TimePickerDialog.OnTimeSetListener {
     private static final String TAG = "TimePickerFragment";
-    final Calendar c = Calendar.getInstance();
+    final Calendar calendar = Calendar.getInstance();
 
     @Override
     @NonNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         // Set the current time as the default time
-        final Calendar c = Calendar.getInstance();
-        int hour = c.get(Calendar.HOUR);
-        int minute = c.get(Calendar.MINUTE);
+        final Calendar calendar = Calendar.getInstance();
+        int hour = calendar.get(Calendar.HOUR);
+        int minute = calendar.get(Calendar.MINUTE);
 
         // Return a new instance of TimePickerDialog
-        return new TimePickerDialog(getActivity(), SelectTimeFragment.this, hour,minute,false);
+        return new TimePickerDialog(getActivity(), SelectTimeFragment.this, hour,minute,true);
     }
 
     // called when a time has been selected
     public void onTimeSet(TimePicker view, int hour,int minute) {
-        c.set(Calendar.HOUR, hour);
-        c.set(Calendar.MINUTE, minute);
-        String selectedTime = new SimpleDateFormat("HH:MM", Locale.ENGLISH).format(c.getTime());
+        calendar.set(Calendar.HOUR, hour);
+        calendar.set(Calendar.MINUTE, minute);
+        //Formats the time correctly
+        String newHour;
+        String newMinute;
+        if(hour==0){
+            newHour="00";
+        }
+        else{
+            newHour=Integer.toString(hour);
+        }
+        if(minute==0){
+            newMinute="00";
+        }
+        else{
+            newMinute=Integer.toString(minute);
+        }
+        String selectedTime = newHour+":"+newMinute;
 
         Log.d(TAG, "onTimeSet: " + selectedTime);
         // send time back to the target fragment

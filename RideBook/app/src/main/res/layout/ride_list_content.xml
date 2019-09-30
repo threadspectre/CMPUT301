@@ -63,7 +63,7 @@
             android:layout_height="30dp"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:text="Distance"
+            android:text="Distance (Km)"
             android:textStyle="bold" />
 
         <TextView
@@ -72,7 +72,7 @@
             android:layout_height="30dp"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:text="Average Speed"
+            android:text="Average Speed (Km/h)"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -111,7 +111,7 @@
             android:layout_height="30dp"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:text="RPM"
+            android:text="Cadence (RPM)"
             android:textStyle="bold" />
 
         <TextView

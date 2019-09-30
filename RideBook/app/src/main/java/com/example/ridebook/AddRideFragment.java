@@ -1,3 +1,4 @@
+//This code is a modified version of the Lab Tutorial on fragments
 package com.example.ridebook;
 
 import android.app.Activity;
@@ -17,6 +18,8 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
+import static android.text.TextUtils.isEmpty;
+
 public class AddRideFragment extends DialogFragment {
     private EditText distanceEditText;
     private EditText averageSpeedEditText;
@@ -26,10 +29,13 @@ public class AddRideFragment extends DialogFragment {
     private EditText timeEditText;
     private OnFragmentInteractionListener listener;
     private Ride ride;
-
+    //Sets fragment title to Add Ride by default
+    protected String title="Add Ride";
+    //Variable required by selectDate and selectTime fragments in order to communicate with this fragment
+    //Based on: https://brandonlehr.com/android/learn-to-code/2018/08/19/callling-android-datepicker-fragment-from-a-fragment-and-getting-the-date?fbclid=IwAR0ixIB3nbIx7k2gQpu1Nz3VU48pg5ii3grksnRqgLNr-TcDZgV2QHg0uXA
     public static final int REQUEST_CODE = 11;
 
-
+    //Added editRide functionality since the fragment wasn't updating the ride correctly without it
     interface OnFragmentInteractionListener{
         public void addRide(Ride ride);
         public void editRide(Ride ride,String date,String time,Double distance,Double averageSpeed,int rpm,String comment);
@@ -81,6 +87,7 @@ public class AddRideFragment extends DialogFragment {
             }
         });
         //Modified datepicker to provide timepicker functionality as well
+        //Also based on:  https://brandonlehr.com/android/learn-to-code/2018/08/19/callling-android-datepicker-fragment-from-a-fragment-and-getting-the-date?fbclid=IwAR0ixIB3nbIx7k2gQpu1Nz3VU48pg5ii3grksnRqgLNr-TcDZgV2QHg0uXA
         final FragmentManager tm = (getActivity()).getSupportFragmentManager();
         timeEditText.setOnClickListener(new View.OnClickListener() {
 
@@ -96,47 +103,61 @@ public class AddRideFragment extends DialogFragment {
         });
 
         if(getArguments()!=null){
+            //Gets ride object from bundle
             ride=(Ride) getArguments().getSerializable("ride");
             distanceEditText.setText(Double.toString(ride.getDistance()));
-            averageSpeedEditText.setText(Double.toString(ride.getAveragespeed()));
+            averageSpeedEditText.setText(Double.toString(ride.getAverageSpeed()));
             dateEditText.setText(ride.getDate());
             rpmEditText.setText(Integer.toString(ride.getRpm()));
             timeEditText.setText(ride.getTime());
             commentEditText.setText(ride.getComment());
+            //Just a small detail, but changes fragment to title to Edit Ride if the ride is not null
+            if(ride!=null){
+                title="Edit Ride";
+            }
         }
 
         return builder.setView(view)
-                .setTitle("Add ride/Edit ride")
+                .setTitle(title)
                 .setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
-                        Double distance= Double.parseDouble(distanceEditText.getText().toString());
-                        Double avgSpeed= Double.parseDouble(averageSpeedEditText.getText().toString());
-                        Integer rpm= Integer.parseInt(rpmEditText.getText().toString());
-                        String date= dateEditText.getText().toString();
-                        String time= timeEditText.getText().toString();
-                        String comment= commentEditText.getText().toString();
+                        Double distance;
+                        Double avgSpeed;
+                        Integer rpm;
+                        String date;
+                        String time;
+                        String comment;
+                        //Prevent empty values from being entered by defaulting them
+                        if(isEmpty(distanceEditText.getText())){
+                            distanceEditText.setText("0.0");
+                        }
+                        if(isEmpty(dateEditText.getText())){
+                            dateEditText.setText("2000-01-01");
+                        }
+                        if(isEmpty(timeEditText.getText())){
+                            timeEditText.setText("00:00");
+                        }
+                        if(isEmpty(rpmEditText.getText())){
+                            rpmEditText.setText("0");
+                        }
+                        if(isEmpty(commentEditText.getText())){
+                            commentEditText.setText("");
+                        }
+                        if(isEmpty(averageSpeedEditText.getText())){
+                            averageSpeedEditText.setText("0.0");
+                        }
+                        distance= Double.parseDouble(distanceEditText.getText().toString());
+                        avgSpeed= Double.parseDouble(averageSpeedEditText.getText().toString());
+                        rpm= Integer.parseInt(rpmEditText.getText().toString());
+                        date= dateEditText.getText().toString();
+                        time= timeEditText.getText().toString();
+                        comment= commentEditText.getText().toString();
 
-                        //TODO: Fix bug where empty fields in add ride crash the app
+                        //TODO: Fix bug where empty inputs in add ride crash the app
+                        //EDIT: Fixed above by defaulting values where input is empty
                         if(ride==null){
-                            if(distanceEditText.getText().toString()==""){
-                                distance=0.0;
-                            }
-                            if(dateEditText.getText().toString()==""){
-                                date="01/01/2000";
-                            }
-                            if(timeEditText.getText().toString()==""){
-                                time="00:00";
-                            }
-                            if(rpmEditText.getText().toString()==""){
-                                rpm=0;
-                            }
-                            if(commentEditText.getText().toString()==""){
-                                comment="";//LOL talk about redundant
-                            }
-                            if(averageSpeedEditText.getText().toString()==""){
-                                avgSpeed=0.0;
-                            }
+
                             Ride ride= new Ride(date,time,distance,avgSpeed,rpm,comment);
                             listener.addRide(ride);
                         }

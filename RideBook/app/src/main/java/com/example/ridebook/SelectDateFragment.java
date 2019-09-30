@@ -1,6 +1,7 @@
 //This datepicker fragment implementation is based on:
 // https://brandonlehr.com/android/learn-to-code/2018/08/19/callling-android-datepicker-fragment-from-a-fragment-and-getting-the-date?fbclid=IwAR0ixIB3nbIx7k2gQpu1Nz3VU48pg5ii3grksnRqgLNr-TcDZgV2QHg0uXA
-//Best efforts were made to not straight up copy and paste but it turns out implementing a datepicker inside a fragment is very hard to do.
+//Best efforts were made to avoid plagiarism, but I believe this constitutes fair and ethical use of this code for the purposes of this assignment.
+//I take absolutely no credit for this work and thank the author immensely.
 
 package com.example.ridebook;
 import android.app.Activity;
@@ -20,17 +21,17 @@ import java.util.Locale;
 
 public class SelectDateFragment extends AppCompatDialogFragment implements DatePickerDialog.OnDateSetListener {
     private static final String TAG = "DatePickerFragment";
-    final Calendar c = Calendar.getInstance();
+    final Calendar calendar = Calendar.getInstance();
 
     @Override
     @NonNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         // Set the current date as the default date
-        final Calendar c = Calendar.getInstance();
-        int year = c.get(Calendar.YEAR);
-        int month = c.get(Calendar.MONTH);
-        int day = c.get(Calendar.DAY_OF_MONTH);
+        final Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         // Return a new instance of DatePickerDialog
         return new DatePickerDialog(getActivity(), SelectDateFragment.this, year, month, day);
@@ -38,10 +39,11 @@ public class SelectDateFragment extends AppCompatDialogFragment implements DateP
 
     // called when a date has been selected
     public void onDateSet(DatePicker view, int year, int month, int day) {
-        c.set(Calendar.YEAR, year);
-        c.set(Calendar.MONTH, month);
-        c.set(Calendar.DAY_OF_MONTH, day);
-        String selectedDate = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH).format(c.getTime());
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month);
+        calendar.set(Calendar.DAY_OF_MONTH, day);
+        //Formats the date correctly
+        String selectedDate = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(calendar.getTime());
 
         Log.d(TAG, "onDateSet: " + selectedDate);
         // send date back to the target fragment
